@@ -11,8 +11,8 @@ function Navigation() {
         </div>
       </div>
       <div className="flex gap-4">
-        <button type="button" className="btn-secondary">Masuk</button>
-        <button type="button" className="btn-primary">Daftar</button>
+        <Link to="/login" className="btn-secondary">Masuk</Link>
+        <Link to="/register" className="btn-primary">Daftar</Link>
       </div>
     </section>
   );
