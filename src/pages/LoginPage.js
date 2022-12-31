@@ -7,7 +7,7 @@ function LoginPage() {
   };
 
   return (
-    <section className="bg-blue-100 min-h-screen flex justify-center items-center">
+    <section className="login-page">
       <article className="flex flex-col">
         <h1 className="font-semibold text-xl text">Login </h1>
         <div className="rounded-md p-10 bg-white md:w-[400px] sm:w-full mt-4">
@@ -15,7 +15,7 @@ function LoginPage() {
           <p className="mt-4 text">
             Sudah punya akun ?
             {' '}
-            <Link to="/">Daftar</Link>
+            <Link to="/register">Daftar</Link>
           </p>
         </div>
       </article>
