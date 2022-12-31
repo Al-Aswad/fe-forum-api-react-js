@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import ThreadItem from './ThreadItem';
 
 function Threads({ threads }) {
-  console.log(threads);
   return (
     <section className="w-10/12 flex gap-4 flex-col">
       {

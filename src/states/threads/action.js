@@ -51,12 +51,12 @@ function asyncReveiveThreads() {
   };
 }
 
-function asyncAddThread({ title, body, category }) {
+function asyncAddThread({ title, category, body }) {
   return async (dispatch) => {
     dispatch(showLoading());
 
     try {
-      const thread = await api.createThread({ title, body, category });
+      const thread = await api.createThread({ title, category, body });
       dispatch(addThreadActionCreator(thread));
     } catch (error) {
       alert(error.message);

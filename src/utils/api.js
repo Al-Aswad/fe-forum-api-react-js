@@ -118,7 +118,7 @@ const api = (() => {
     return threads;
   }
 
-  async function createThread({ title, body, category }) {
+  async function createThread({ title, category, body }) {
     const response = await _fetchWithAuth(`${BASE_URL}/threads`, {
       method: 'POST',
       headers: {
@@ -126,8 +126,8 @@ const api = (() => {
       },
       body: JSON.stringify({
         title,
-        body,
         category,
+        body,
       }),
     });
 
@@ -139,9 +139,9 @@ const api = (() => {
       throw new Error(message);
     }
 
-    const { data: { talk } } = responseJson;
+    const { data: { thread } } = responseJson;
 
-    return talk;
+    return thread;
   }
 
   return {

@@ -1,15 +1,22 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import AddThreadInput from '../components/AddThreadInput';
 import { asyncAddThread } from '../states/threads/action';
 
 function AddThreadPage() {
+  const {
+    authUser,
+  } = useSelector((states) => states);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onAddThread = ({ title, category, body }) => {
     // @TODO: dispatch async action to add talk
-
+    if (authUser === null) {
+      navigate('/login');
+      return;
+    }
     dispatch(asyncAddThread({ title, category, body }));
     navigate('/');
   };

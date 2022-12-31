@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-function Navigation({ authUser, signOut }) {
+function Navigation({ authUser, logout }) {
   return (
     <section className="navigation">
       <div className="flex items-center gap-10">
@@ -11,10 +11,26 @@ function Navigation({ authUser, signOut }) {
           <Link to="/leaderboard" className="text">Leaderboard</Link>
         </div>
       </div>
-      <div className="flex gap-4">
-        <Link to="/login" className="btn-secondary">Masuk</Link>
-        <Link to="/register" className="btn-primary">Daftar</Link>
-      </div>
+
+      {
+        authUser === null
+          ? (
+            <div className="flex gap-4">
+              <Link to="/login" className="btn-secondary">Masuk</Link>
+              <Link to="/register" className="btn-primary">Daftar</Link>
+            </div>
+          )
+          : (
+            <div className="flex items-center gap-2">
+              <img className="rounded-full w-10" src={authUser.avatar} alt="img" />
+              <h3 className="font-semibold text-md capitalize">
+                {authUser.name}
+              </h3>
+              <button type="button" className="btn-secondary ml-2" onClick={logout}>Keluar</button>
+
+            </div>
+          )
+      }
     </section>
   );
 }
@@ -27,12 +43,13 @@ const authUserShape = {
 };
 
 Navigation.defaultProps = {
-  signOut: () => {},
+  logout: () => {},
+  authUser: null,
 };
 
 Navigation.propTypes = {
-  authUser: PropTypes.shape(authUserShape).isRequired,
-  signOut: PropTypes.func,
+  authUser: PropTypes.shape(authUserShape),
+  logout: PropTypes.func,
 };
 
 export default Navigation;

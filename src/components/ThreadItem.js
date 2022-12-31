@@ -23,7 +23,6 @@ function ThreadItem({
     <div className="rounded-lg bg-white p-4">
 
       <div className="text flex justify-between items-center">
-        {/* {category} */}
         <div className="flex items-center gap-2">
           <img className="rounded-full w-10" src={avatar} alt="img" />
           <h3 className="font-semibold text-md">
@@ -38,14 +37,14 @@ function ThreadItem({
       </div>
 
       <div className="py-4">
-        <h3 className="text font-medium text-lg">
+        <div className="text font-medium text-lg">
           <Link to="/threads/sasas">{title}</Link>
           <h3 className="text-slate-300 mb-2">{category}</h3>
-        </h3>
+        </div>
         <div>
-          <p>
+          <div>
             {parse(body)}
-          </p>
+          </div>
         </div>
       </div>
 
