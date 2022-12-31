@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 function Navigation({ authUser, signOut }) {
-  console.log(authUser, signOut);
   return (
     <section className="navigation">
       <div className="flex items-center gap-10">
