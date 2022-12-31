@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-function Navigation() {
+function Navigation({ authUser, signOut }) {
+  console.log(authUser, signOut);
   return (
     <section className="navigation">
       <div className="flex items-center gap-10">
@@ -17,5 +19,21 @@ function Navigation() {
     </section>
   );
 }
+
+const authUserShape = {
+  name: PropTypes.string,
+  email: PropTypes.string,
+  photo: PropTypes.string,
+
+};
+
+Navigation.defaultProps = {
+  signOut: () => {},
+};
+
+Navigation.propTypes = {
+  authUser: PropTypes.shape(authUserShape).isRequired,
+  signOut: PropTypes.func,
+};
 
 export default Navigation;

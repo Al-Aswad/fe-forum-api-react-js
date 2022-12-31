@@ -1,9 +1,15 @@
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import LoginInput from '../components/LoginInput';
+import { asyncSetAuthUser } from '../states/authUser/action';
 
 function LoginPage() {
+  const dispacth = useDispatch();
+  const navigate = useNavigate();
+
   const onLogin = ({ email, password }) => {
-    console.log(email, password);
+    dispacth(asyncSetAuthUser({ email, password }));
+    navigate('/');
   };
 
   return (
