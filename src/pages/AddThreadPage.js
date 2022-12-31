@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import AddThreadInput from '../components/AddThreadInput';
 
 function AddThreadPage() {
