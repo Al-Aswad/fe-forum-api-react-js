@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import parse from 'html-react-parser';
 import { postedAt } from '../utils';
 
 // "id": "thread-1",
@@ -43,9 +44,7 @@ function ThreadItem({
         </h3>
         <div>
           <p>
-            {body.length > 250
-              ? `${body.substring(0, 250)}...`
-              : body}
+            {parse(body)}
           </p>
         </div>
       </div>

@@ -118,6 +118,32 @@ const api = (() => {
     return threads;
   }
 
+  async function createThread({ title, body, category }) {
+    const response = await _fetchWithAuth(`${BASE_URL}/threads`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title,
+        body,
+        category,
+      }),
+    });
+
+    const responseJson = await response.json();
+
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+
+    const { data: { talk } } = responseJson;
+
+    return talk;
+  }
+
   return {
     register,
     login,
@@ -126,6 +152,7 @@ const api = (() => {
     getOwnProfile,
     getAllUsers,
     getAllThreads,
+    createThread,
   };
 })();
 
