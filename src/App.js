@@ -27,7 +27,6 @@ function App() {
 
   const onSignOut = () => {
     // @TODO: dispatch async action to sign out
-    console.log('logout');
     dispatch(asyncUnSetAuthUser());
   };
 

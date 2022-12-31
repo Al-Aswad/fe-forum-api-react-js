@@ -1,23 +1,25 @@
 /* eslint-disable react/prop-types */
 import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import parse from 'html-react-parser';
 import { postedAt } from '../utils';
-
-// "id": "thread-1",
-// "title": "Thread Pertama",
-// "body": "Ini adalah thread pertama",
-// "category": "General",
-// "createdAt": "2021-06-21T07:00:00.000Z",
-// "ownerId": "users-1",
-// "upVotesBy": [],
-// "downVotesBy": [],
-// "totalComments": 0
 
 function ThreadItem({
   id, title, body, category, createdAt, ownerId, totalComments, user,
 }) {
+  const navigate = useNavigate();
+
   const { name, avatar } = user;
+
+  const onThreadClick = () => {
+    navigate(`/threads/${id}`);
+  };
+
+  const onThreadPress = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      navigate(`/threads/${id}`);
+    }
+  };
 
   return (
     <div className="rounded-lg bg-white p-4">
@@ -36,9 +38,9 @@ function ThreadItem({
         </div>
       </div>
 
-      <div className="py-4">
+      <div role="button" tabIndex={0} className="py-4" onClick={onThreadClick} onKeyDown={onThreadPress}>
         <div className="text font-medium text-lg">
-          <Link to="/threads/sasas">{title}</Link>
+          <h3>{title}</h3>
           <h3 className="text-slate-300 mb-2">{category}</h3>
         </div>
         <div>
@@ -63,8 +65,8 @@ function ThreadItem({
             Balasan
           </span>
         </p>
-
       </div>
+
     </div>
   );
 }
