@@ -1,4 +1,3 @@
-import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai';
 import ThreadItem from './ThreadItem';
 
 function Threads() {

@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import Navigation from './components/Navigation';
+import AddThreadPage from './pages/AddThreadPage';
 import HomePage from './pages/HomePage';
 import Leaderboard from './pages/LeaderBoard';
 import LoginPage from './pages/LoginPage';
@@ -17,6 +18,7 @@ function App() {
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/threads/create" element={<AddThreadPage />} />
         </Routes>
       </main>
     </div>
