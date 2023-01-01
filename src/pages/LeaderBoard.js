@@ -1,4 +1,19 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import UserProfile from '../components/UserProfile';
+import { asyncReceiveLeadeBoard } from '../states/LeaderBoard/action';
+
 function Leaderboard() {
+  const {
+    leaderBoards = [],
+  } = useSelector((states) => states);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(asyncReceiveLeadeBoard());
+  }, [dispatch]);
+
   return (
     <section className="leaderboard-page">
       <div className="rounded-md bg-white w-full py-6 p-4 text-xl font-semibold text shadow-sm shadow-slate-400 mb-6">
@@ -13,14 +28,16 @@ function Leaderboard() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td className="py-4">The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-            <td className="text-right">Malcolm Lockyer</td>
-          </tr>
-          <tr>
-            <td className="py-4">The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-            <td className="text-right">Malcolm Lockyer</td>
-          </tr>
+          {
+          leaderBoards.map((leaderboard) => (
+            <tr key={leaderboard.user.id}>
+              <td className="py-4">
+                <UserProfile name={leaderboard.user.name} avatar={leaderboard.user.avatar} />
+              </td>
+              <td className="text-right">{leaderboard.score}</td>
+            </tr>
+          ))
+        }
         </tbody>
       </table>
     </section>

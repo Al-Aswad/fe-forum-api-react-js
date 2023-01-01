@@ -1,14 +1,19 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 function Navigation({ authUser, logout }) {
+  const { pathname } = useLocation();
+  console.log(pathname);
+
   return (
     <section className="navigation">
       <div className="flex items-center gap-10">
         <Link to="/" className="font-semibold text-xl text">Forum API</Link>
         <div className="flex gap-4 items-center">
-          <Link to="/" className="text active">Forum</Link>
-          <Link to="/leaderboard" className="text">Leaderboard</Link>
+          <Link to="/" className={pathname === '/' ? 'text active' : 'text'}>Forum</Link>
+          <Link to="/leaderboard" className={pathname === '/leaderboard' ? 'text active' : 'text'}>
+            Leaderboard
+          </Link>
         </div>
       </div>
 

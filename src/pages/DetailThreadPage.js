@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import parse from 'html-react-parser';
 import CommentItem from '../components/CommentItem';
 import CommentInput from '../components/CommentInput';
@@ -13,6 +13,7 @@ function DetailThreadPages() {
 
   const {
     threadDetail = null,
+    authUser,
   } = useSelector((states) => states);
   const dispatch = useDispatch();
 
@@ -26,7 +27,6 @@ function DetailThreadPages() {
   const onAddComment = ({ content, threadId }) => {
     dispatch(asyncAddComment({ content, threadId }));
   };
-
   return (
     <section className="detail-thread-page">
       <div className="rounded-md bg-white py-4 px-6 w-full">
@@ -66,7 +66,7 @@ function DetailThreadPages() {
           <p className="text">
             {' '}
             <span>
-              {threadDetail?.totalComments ? threadDetail?.totalComments : 0}
+              {threadDetail?.comments.length}
               {' '}
               Balasan
             </span>
@@ -75,7 +75,21 @@ function DetailThreadPages() {
 
         <div className="mt-4">
           <h3 className="mb-2">Beri Komentar</h3>
-          <CommentInput addComment={onAddComment} threadId={threadDetail?.id} />
+          {
+            authUser === null
+              ? (
+                <div>
+                  Silahkann
+                  {' '}
+                  <Link to="/login" className="underline">Login</Link>
+                </div>
+
+              )
+              : (
+                <CommentInput addComment={onAddComment} threadId={threadDetail?.id} />
+
+              )
+          }
         </div>
 
         <div className="rounded-md bg-white py-4 w-full">

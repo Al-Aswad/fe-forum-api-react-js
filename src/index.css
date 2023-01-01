@@ -64,7 +64,7 @@
     }
 
     .active {
-      @apply text-slate-900 text-xl;
+      @apply text-lg font-medium text-sky-400;
     }
 
     .icon {
