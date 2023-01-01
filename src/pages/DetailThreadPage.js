@@ -167,7 +167,7 @@ function DetailThreadPages() {
           </h3>
           {
             threadDetail.comments.map((comment) => (
-              <CommentItem key={comment.id} comment={comment} />
+              <CommentItem key={comment.id} threadId={threadDetail.id} comment={comment} />
             ))
           }
         </div>

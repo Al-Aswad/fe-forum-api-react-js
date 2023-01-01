@@ -9,6 +9,9 @@ const ActionType = {
   UP_VOTE_THREAD_DETAIL: 'UP_VOTE_THREAD_DETAIL',
   DOWN_VOTE_THREAD_DETAIL: 'DOWN_VOTE_THREAD_DETAIL',
   NEUTRAL_VOTE_THREAD_DETAIL: 'NEUTRAL_VOTE_THREAD_DETAIL',
+  UP_VOTE_COMMENT_DETAIL: 'UP_VOTE_COMMENT_DETAIL',
+  DOWN_VOTE_COMMENT_DETAIL: 'DOWN_VOTE_COMMENT_DETAIL',
+  NEUTRAL_VOTE_COMMENT_DETAIL: 'NEUTRAL_VOTE_COMMENT_DETAIL',
 };
 
 function receiveThreadDetailActionActionCreator(threadDetail) {
@@ -61,6 +64,36 @@ function downVoteThreadDetailActionCreator({ vote, threadId }) {
     type: ActionType.DOWN_VOTE_THREAD_DETAIL,
     payload: {
       threadId,
+      userId: vote.userId,
+    },
+  };
+}
+
+function upVoteCommentDetailActionCreator({ vote, commentId }) {
+  return {
+    type: ActionType.UP_VOTE_COMMENT_DETAIL,
+    payload: {
+      commentId,
+      userId: vote.userId,
+    },
+  };
+}
+
+function neutralVoteCommentDetailActionCreator({ vote, commentId }) {
+  return {
+    type: ActionType.NEUTRAL_VOTE_COMMENT_DETAIL,
+    payload: {
+      commentId,
+      userId: vote.userId,
+    },
+  };
+}
+
+function downVoteCommentDetailActionCreator({ vote, commentId }) {
+  return {
+    type: ActionType.DOWN_VOTE_COMMENT_DETAIL,
+    payload: {
+      commentId,
       userId: vote.userId,
     },
   };
@@ -149,6 +182,54 @@ function asyncDownVoteThread(threadId) {
   };
 }
 
+function asyncUpVoteComment({ threadId, commentId }) {
+  return async (dispatch) => {
+    dispatch(showLoading());
+
+    try {
+      const vote = await api.upVoteComment({ threadId, commentId });
+
+      dispatch(upVoteCommentDetailActionCreator({ vote, commentId }));
+    } catch (error) {
+      alert(error.message);
+    }
+
+    dispatch(hideLoading());
+  };
+}
+
+function asyncNeutralVoteComment({ threadId, commentId }) {
+  return async (dispatch) => {
+    dispatch(showLoading());
+
+    try {
+      const vote = await api.neutralVoteComment({ threadId, commentId });
+
+      dispatch(neutralVoteCommentDetailActionCreator({ vote, threadId }));
+    } catch (error) {
+      alert(error.message);
+    }
+
+    dispatch(hideLoading());
+  };
+}
+
+function asyncDownVoteComment({ threadId, commentId }) {
+  return async (dispatch) => {
+    dispatch(showLoading());
+
+    try {
+      const vote = await api.downVoteComment({ threadId, commentId });
+
+      dispatch(downVoteCommentDetailActionCreator({ vote, threadId }));
+    } catch (error) {
+      alert(error.message);
+    }
+
+    dispatch(hideLoading());
+  };
+}
+
 export {
   ActionType,
   receiveThreadDetailActionActionCreator,
@@ -158,5 +239,7 @@ export {
   asyncUpVoteThread,
   asyncNeutralVoteThread,
   asyncDownVoteThread,
-
+  asyncUpVoteComment,
+  asyncNeutralVoteComment,
+  asyncDownVoteComment,
 };
