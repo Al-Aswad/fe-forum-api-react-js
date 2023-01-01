@@ -70,5 +70,13 @@
     .icon {
       @apply hover:bg-sky-200 p-2 rounded-md;
     }
+
+    .vote {
+      @apply flex p-2 rounded-md items-center hover:bg-sky-400;
+    }
+
+    .vote-active {
+      @apply bg-green-300 text-slate-500;
+    }
     
   }
