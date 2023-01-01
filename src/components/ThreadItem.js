@@ -27,9 +27,7 @@ function ThreadItem({
     if (downVotesBy.includes(authUser)) {
       setIsVoteDown(true);
     }
-  }, []);
-
-  // console.log('up', upVotesBy);
+  }, [authUser, upVotesBy, downVotesBy]);
 
   const onThreadClick = () => {
     navigate(`/threads/${id}`);

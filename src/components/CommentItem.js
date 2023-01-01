@@ -21,7 +21,7 @@ function CommentItem({ comment, threadId, authUser }) {
       setIsVoteUp(upVotesBy.includes(authUser.id));
       setIsVoteDown(downVotesBy.includes(authUser.id));
     }
-  }, [dispatch, authUser]);
+  }, [dispatch, authUser, downVotesBy, upVotesBy]);
 
   const onUpVote = (_threadId, commentId) => {
     if (authUser === null) {

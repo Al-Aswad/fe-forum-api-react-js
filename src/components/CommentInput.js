@@ -13,7 +13,6 @@ function CommentInput({ addComment, threadId }) {
     }
 
     addComment({ content, threadId });
-    onCommentInput('');
   }
 
   return (
