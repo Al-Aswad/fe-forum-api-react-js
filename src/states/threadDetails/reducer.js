@@ -59,11 +59,10 @@ function threadDetailReducer(threadDetail = null, action = {}) {
               ...comment,
               downVotesBy: comment.downVotesBy.includes(action.payload.userId)
                 ? comment.downVotesBy.filter((id) => id !== action.payload.userId)
-                : comment.downVotesBy.concat([action.payload.userId]),
+                : [...comment.downVotesBy, action.payload.userId],
               upVotesBy: comment.upVotesBy.filter((id) => id !== action.payload.userId),
             };
           }
-
           return comment;
         }),
       };

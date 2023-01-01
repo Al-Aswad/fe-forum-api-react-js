@@ -153,7 +153,11 @@ function DetailThreadPages() {
 
               )
               : (
-                <CommentInput addComment={onAddComment} threadId={threadDetail.id} />
+                <CommentInput
+                  addComment={onAddComment}
+                  threadId={threadDetail.id}
+                  authUser={authUser}
+                />
 
               )
           }

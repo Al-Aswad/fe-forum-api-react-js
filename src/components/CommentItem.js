@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { asyncDownVoteComment, asyncNeutralVoteComment, asyncUpVoteComment } from '../states/threadDetails/action';
 import { postedAt } from '../utils';
@@ -7,7 +7,7 @@ import UserProfile from './UserProfile';
 import VoteDown from './VoteDown';
 import VoteUp from './VoteUp';
 
-function CommentItem({ comment, threadId }) {
+function CommentItem({ comment, threadId, authUser }) {
   const {
     id, owner, content, createdAt, upVotesBy, downVotesBy,
   } = comment;
@@ -15,6 +15,13 @@ function CommentItem({ comment, threadId }) {
   const dispatch = useDispatch();
   const [isVoteUp, setIsVoteUp] = useState(false);
   const [isVoteDown, setIsVoteDown] = useState(false);
+
+  useEffect(() => {
+    if (authUser) {
+      setIsVoteUp(upVotesBy.includes(authUser.id));
+      setIsVoteDown(downVotesBy.includes(authUser.id));
+    }
+  }, [dispatch]);
 
   const onUpVote = (_threadId, commentId) => {
     setIsVoteUp(!isVoteUp);
@@ -44,14 +51,46 @@ function CommentItem({ comment, threadId }) {
         {content}
       </div>
       <div className="flex gap-2 items-center">
-        <VoteUp id={threadId} commentId={id} active action={onUpVote} length={upVotesBy.length} />
-        <VoteDown
-          id={threadId}
-          commentId={id}
-          active
-          action={onDownVote}
-          length={downVotesBy.length}
-        />
+        {
+          isVoteUp
+            ? (
+              <VoteUp
+                id={threadId}
+                commentId={id}
+                active
+                action={onNetralVote}
+                length={upVotesBy.length}
+              />
+            )
+            : (
+              <VoteUp
+                id={threadId}
+                commentId={id}
+                action={onUpVote}
+                length={upVotesBy.length}
+              />
+            )
+      }
+        {
+        isVoteDown
+          ? (
+            <VoteDown
+              id={threadId}
+              commentId={id}
+              active
+              action={onNetralVote}
+              length={downVotesBy.length}
+            />
+          )
+          : (
+            <VoteDown
+              id={threadId}
+              commentId={id}
+              action={onDownVote}
+              length={downVotesBy.length}
+            />
+          )
+      }
       </div>
     </div>
   );

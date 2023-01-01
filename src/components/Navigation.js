@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 function Navigation({ authUser, logout }) {
   const { pathname } = useLocation();
-  console.log(pathname);
 
   return (
     <section className="navigation">

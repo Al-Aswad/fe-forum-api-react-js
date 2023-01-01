@@ -72,7 +72,7 @@
     }
 
     .vote {
-      @apply flex p-2 rounded-md items-center hover:bg-sky-400;
+      @apply flex p-2 rounded-md items-center hover:bg-sky-400 outline-none;
     }
 
     .vote-active {

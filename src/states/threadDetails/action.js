@@ -221,7 +221,7 @@ function asyncDownVoteComment({ threadId, commentId }) {
     try {
       const vote = await api.downVoteComment({ threadId, commentId });
 
-      dispatch(downVoteCommentDetailActionCreator({ vote, threadId }));
+      dispatch(downVoteCommentDetailActionCreator({ vote, commentId }));
     } catch (error) {
       alert(error.message);
     }
