@@ -21,21 +21,36 @@ function CommentItem({ comment, threadId, authUser }) {
       setIsVoteUp(upVotesBy.includes(authUser.id));
       setIsVoteDown(downVotesBy.includes(authUser.id));
     }
-  }, [dispatch]);
+  }, [dispatch, authUser]);
 
   const onUpVote = (_threadId, commentId) => {
+    if (authUser === null) {
+      alert('Silahkan login terlebih dahulu');
+      return;
+    }
+
     setIsVoteUp(!isVoteUp);
     setIsVoteDown(false);
     dispatch(asyncUpVoteComment({ threadId: _threadId, commentId }));
   };
 
   const onNetralVote = (_threadId, commentId) => {
+    if (authUser === null) {
+      alert('Silahkan login terlebih dahulu');
+      return;
+    }
+
     setIsVoteUp(false);
     setIsVoteDown(false);
     dispatch(asyncNeutralVoteComment({ threadId: _threadId, commentId }));
   };
 
   const onDownVote = (_threadId, commentId) => {
+    if (authUser === null) {
+      alert('Silahkan login terlebih dahulu');
+      return;
+    }
+
     setIsVoteDown(!isVoteDown);
     setIsVoteUp(false);
     dispatch(asyncDownVoteComment({ threadId: _threadId, commentId }));

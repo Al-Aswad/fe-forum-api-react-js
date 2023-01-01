@@ -42,18 +42,33 @@ function DetailThreadPages() {
   };
 
   const onUpVote = (threadId) => {
+    if (authUser === null) {
+      alert('Silahkan login terlebih dahulu');
+      return;
+    }
+
     setIsVoteUp(!isVoteUp);
     setIsVoteDown(false);
     dispatch(asyncUpVoteThread(threadId, authUser));
   };
 
   const onNetralVote = (threadId) => {
+    if (authUser === null) {
+      alert('Silahkan login terlebih dahulu');
+      return;
+    }
+
     setIsVoteUp(false);
     setIsVoteDown(false);
     dispatch(asyncNeutralVoteThread(threadId));
   };
 
   const onDownVote = (threadId) => {
+    if (authUser === null) {
+      alert('Silahkan login terlebih dahulu');
+      return;
+    }
+
     setIsVoteDown(!isVoteDown);
     setIsVoteUp(false);
     dispatch(asyncDownVoteThread(threadId));
@@ -171,7 +186,12 @@ function DetailThreadPages() {
           </h3>
           {
             threadDetail.comments.map((comment) => (
-              <CommentItem key={comment.id} threadId={threadDetail.id} comment={comment} />
+              <CommentItem
+                key={comment.id}
+                threadId={threadDetail.id}
+                comment={comment}
+                authUser={authUser}
+              />
             ))
           }
         </div>
