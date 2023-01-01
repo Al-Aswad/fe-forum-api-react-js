@@ -1,15 +1,22 @@
-import { useEffect } from 'react';
-import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import parse from 'html-react-parser';
 import CommentItem from '../components/CommentItem';
 import CommentInput from '../components/CommentInput';
-import { asyncAddComment, asyncReceiveThreadDetail } from '../states/threadDetails/action';
+import {
+  asyncAddComment, asyncDownVoteThread,
+  asyncNeutralVoteThread, asyncReceiveThreadDetail,
+  asyncUpVoteThread,
+} from '../states/threadDetails/action';
 import { postedAt } from '../utils';
+import VoteUp from '../components/VoteUp';
+import VoteDown from '../components/VoteDown';
 
 function DetailThreadPages() {
   const { id } = useParams();
+  const [isVoteUp, setIsVoteUp] = useState(false);
+  const [isVoteDown, setIsVoteDown] = useState(false);
 
   const {
     threadDetail = null,
@@ -18,7 +25,6 @@ function DetailThreadPages() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // @TODO: dispatch async action to get talk detail by id
     if (id) {
       dispatch(asyncReceiveThreadDetail(id));
     }
@@ -26,6 +32,24 @@ function DetailThreadPages() {
 
   const onAddComment = ({ content, threadId }) => {
     dispatch(asyncAddComment({ content, threadId }));
+  };
+
+  const onUpVote = (threadId) => {
+    setIsVoteUp(!isVoteUp);
+    setIsVoteDown(false);
+    dispatch(asyncUpVoteThread(threadId, authUser));
+  };
+
+  const onNetralVote = (threadId) => {
+    setIsVoteUp(false);
+    setIsVoteDown(false);
+    dispatch(asyncNeutralVoteThread(threadId));
+  };
+
+  const onDownVote = (threadId) => {
+    setIsVoteDown(!isVoteDown);
+    setIsVoteUp(false);
+    dispatch(asyncDownVoteThread(threadId));
   };
 
   if (threadDetail === null) {
@@ -62,12 +86,43 @@ function DetailThreadPages() {
         </div>
 
         <div className="flex gap-2 items-center">
-          <span className="icon">
-            <AiOutlineArrowUp />
-          </span>
-          <span className="icon">
-            <AiOutlineArrowDown />
-          </span>
+          {
+          isVoteUp
+            ? (
+              <VoteUp
+                active
+                id={threadDetail.id}
+                action={onNetralVote}
+                length={threadDetail.upVotesBy.length}
+              />
+            )
+            : (
+              <VoteUp
+                id={threadDetail.id}
+                action={onUpVote}
+                length={threadDetail.upVotesBy.length}
+              />
+            )
+          }
+
+          {
+          isVoteDown
+            ? (
+              <VoteDown
+                id={threadDetail.id}
+                action={onNetralVote}
+                active
+                length={threadDetail.downVotesBy.length}
+              />
+            )
+            : (
+              <VoteDown
+                id={threadDetail.id}
+                action={onDownVote}
+                length={threadDetail.downVotesBy.length}
+              />
+            )
+          }
           <p className="text">
             {' '}
             <span>
