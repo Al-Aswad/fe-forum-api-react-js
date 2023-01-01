@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import parse from 'html-react-parser';
 import CommentItem from '../components/CommentItem';
-import CommentInput from '../components/CommnetInput';
-import { asyncReceiveThreadDetail } from '../states/threadDetails/action';
+import CommentInput from '../components/CommentInput';
+import { asyncAddComment, asyncReceiveThreadDetail } from '../states/threadDetails/action';
 import { postedAt } from '../utils';
 
 function DetailThreadPages() {
@@ -13,7 +13,6 @@ function DetailThreadPages() {
 
   const {
     threadDetail = null,
-    authUser,
   } = useSelector((states) => states);
   const dispatch = useDispatch();
 
@@ -24,9 +23,13 @@ function DetailThreadPages() {
     }
   }, [id, dispatch]);
 
+  const onAddComment = ({ content, threadId }) => {
+    dispatch(asyncAddComment({ content, threadId }));
+  };
+
   return (
     <section className="detail-thread-page">
-      <div className="rounded-md bg-white p-4 w-full">
+      <div className="rounded-md bg-white py-4 px-6 w-full">
         <div className="text flex justify-between items-center">
           <div className="flex items-center gap-2">
             <img className="rounded-full w-10" src={threadDetail?.owner.avatar} alt="img" />
@@ -43,8 +46,8 @@ function DetailThreadPages() {
 
         <div className="py-4">
           <div className="text font-medium text-lg">
-            <h3>{threadDetail?.title}</h3>
-            <h3 className="text-slate-300 mb-2">{threadDetail?.category}</h3>
+            <h3 className="text-slate-300">{threadDetail?.category}</h3>
+            <h3 className="mb-4">{threadDetail?.title}</h3>
           </div>
           <div>
             <div>
@@ -72,7 +75,7 @@ function DetailThreadPages() {
 
         <div className="mt-4">
           <h3 className="mb-2">Beri Komentar</h3>
-          <CommentInput />
+          <CommentInput addComment={onAddComment} threadId={threadDetail?.id} />
         </div>
 
         <div className="rounded-md bg-white py-4 w-full">

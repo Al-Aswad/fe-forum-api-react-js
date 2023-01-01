@@ -13,6 +13,7 @@ const store = configureStore({
     users: usersReducer,
     threads: threadsReducer,
     threadDetail: threadDetailReducer,
+    // comments: commentReducer,
     loadingBar: loadingBarReducer,
 
   },
