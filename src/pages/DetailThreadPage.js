@@ -30,6 +30,13 @@ function DetailThreadPages() {
     }
   }, [id, dispatch]);
 
+  useEffect(() => {
+    if (threadDetail && authUser) {
+      setIsVoteUp(threadDetail.upVotesBy.includes(authUser.id));
+      setIsVoteDown(threadDetail.downVotesBy.includes(authUser.id));
+    }
+  }, [threadDetail, authUser]);
+
   const onAddComment = ({ content, threadId }) => {
     dispatch(asyncAddComment({ content, threadId }));
   };
