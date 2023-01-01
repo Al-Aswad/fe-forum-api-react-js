@@ -22,13 +22,11 @@ function HomePage() {
 
   useEffect(() => {
     dispatch(asyncPopulateUsersAndThreads());
-    if (threads.length > 0) {
-      setCategories(groupByCount(threads, 'category'));
-    }
   }, [dispatch]);
 
   useEffect(() => {
     addUserToThreads();
+    setCategories(groupByCount(threads, 'category'));
   }, [threads, authUser]);
 
   function addUserToThreads() {

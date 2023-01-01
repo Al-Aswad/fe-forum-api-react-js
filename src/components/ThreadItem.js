@@ -21,12 +21,8 @@ function ThreadItem({
   const { name, avatar } = user;
 
   useEffect(() => {
-    if (upVotesBy.includes(authUser)) {
-      setIsVoteUp(true);
-    }
-    if (downVotesBy.includes(authUser)) {
-      setIsVoteDown(true);
-    }
+    setIsVoteUp(upVotesBy.includes(authUser));
+    setIsVoteDown(downVotesBy.includes(authUser));
   }, [authUser, upVotesBy, downVotesBy]);
 
   const onThreadClick = () => {
@@ -101,25 +97,18 @@ function ThreadItem({
       </div>
 
       <div className="flex gap-2 items-center">
-        {
-        isVoteUp
-          ? (
-            <VoteUp active id={id} action={onNetralVote} length={upVotesBy.length} />
-          )
-          : (
-            <VoteUp id={id} action={onUpVote} length={upVotesBy.length} />
-          )
-        }
-
-        {
-        isVoteDown
-          ? (
-            <VoteDown id={id} action={onNetralVote} active length={downVotesBy.length} />
-          )
-          : (
-            <VoteDown id={id} action={onDownVote} length={downVotesBy.length} />
-          )
-        }
+        <VoteUp
+          id={id}
+          active={isVoteUp}
+          action={isVoteUp ? onNetralVote : onUpVote}
+          length={upVotesBy.length}
+        />
+        <VoteDown
+          id={id}
+          active={isVoteDown}
+          action={isVoteDown ? onNetralVote : onDownVote}
+          length={downVotesBy.length}
+        />
         <p className="text">
           {' '}
           <span>

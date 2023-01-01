@@ -108,43 +108,21 @@ function DetailThreadPages() {
         </div>
 
         <div className="flex gap-2 items-center">
-          {
-          isVoteUp
-            ? (
-              <VoteUp
-                active
-                id={threadDetail.id}
-                action={onNetralVote}
-                length={threadDetail.upVotesBy.length}
-              />
-            )
-            : (
-              <VoteUp
-                id={threadDetail.id}
-                action={onUpVote}
-                length={threadDetail.upVotesBy.length}
-              />
-            )
-          }
 
-          {
-          isVoteDown
-            ? (
-              <VoteDown
-                id={threadDetail.id}
-                action={onNetralVote}
-                active
-                length={threadDetail.downVotesBy.length}
-              />
-            )
-            : (
-              <VoteDown
-                id={threadDetail.id}
-                action={onDownVote}
-                length={threadDetail.downVotesBy.length}
-              />
-            )
-          }
+          <VoteUp
+            active={isVoteUp}
+            id={threadDetail.id}
+            action={isVoteUp ? onNetralVote : onUpVote}
+            length={threadDetail.upVotesBy.length}
+          />
+
+          <VoteDown
+            active={isVoteDown}
+            id={threadDetail.id}
+            action={isVoteDown ? onNetralVote : onDownVote}
+            length={threadDetail.downVotesBy.length}
+          />
+
           <p className="text">
             {' '}
             <span>

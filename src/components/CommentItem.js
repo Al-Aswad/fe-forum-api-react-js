@@ -66,46 +66,23 @@ function CommentItem({ comment, threadId, authUser }) {
         {content}
       </div>
       <div className="flex gap-2 items-center">
-        {
-          isVoteUp
-            ? (
-              <VoteUp
-                id={threadId}
-                commentId={id}
-                active
-                action={onNetralVote}
-                length={upVotesBy.length}
-              />
-            )
-            : (
-              <VoteUp
-                id={threadId}
-                commentId={id}
-                action={onUpVote}
-                length={upVotesBy.length}
-              />
-            )
-      }
-        {
-        isVoteDown
-          ? (
-            <VoteDown
-              id={threadId}
-              commentId={id}
-              active
-              action={onNetralVote}
-              length={downVotesBy.length}
-            />
-          )
-          : (
-            <VoteDown
-              id={threadId}
-              commentId={id}
-              action={onDownVote}
-              length={downVotesBy.length}
-            />
-          )
-      }
+
+        <VoteUp
+          id={threadId}
+          commentId={id}
+          active={isVoteUp}
+          action={isVoteUp ? onNetralVote : onUpVote}
+          length={upVotesBy.length}
+        />
+
+        <VoteDown
+          id={threadId}
+          commentId={id}
+          active={isVoteDown}
+          action={isVoteDown ? onNetralVote : onDownVote}
+          length={downVotesBy.length}
+        />
+
       </div>
     </div>
   );
