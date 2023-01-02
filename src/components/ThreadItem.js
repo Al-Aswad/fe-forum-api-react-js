@@ -15,6 +15,7 @@ function ThreadItem({
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [showMore, setShowMore] = useState(false);
   const [isVoteUp, setIsVoteUp] = useState(false);
   const [isVoteDown, setIsVoteDown] = useState(false);
 
@@ -68,6 +69,10 @@ function ThreadItem({
     dispatch(asyncDownVoteThread(threadId));
   };
 
+  function removeTag(text) {
+    return text.replace(/<[^>]+>/g, '');
+  }
+
   return (
     <div className="rounded-lg bg-white p-4">
       <div className="text flex justify-between items-center">
@@ -84,15 +89,32 @@ function ThreadItem({
         </div>
       </div>
 
-      <div role="button" tabIndex={0} className="py-4" onClick={onThreadClick} onKeyDown={onThreadPress}>
-        <div className="text font-medium text-lg">
+      <div className="py-4">
+        <div
+          role="button"
+          tabIndex={0}
+          className="text font-medium text-lg"
+          onClick={onThreadClick}
+          onKeyDown={onThreadPress}
+        >
           <h3>{title}</h3>
           <h3 className="text-slate-300 mb-2">{category}</h3>
         </div>
         <div>
           <div>
-            {parse(body)}
+            {showMore ? parse(body) : parse(removeTag(body).substring(0, 250))}
           </div>
+          {removeTag(body).length > 250
+            && (
+              <button
+                type="button"
+                onClick={() => setShowMore(!showMore)}
+              >
+                <span className="underline">
+                  {showMore ? 'Show less' : 'Show more'}
+                </span>
+              </button>
+            )}
         </div>
       </div>
 
