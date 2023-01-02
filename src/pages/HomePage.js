@@ -27,7 +27,7 @@ function HomePage() {
   useEffect(() => {
     addUserToThreads();
     setCategories(groupByCount(threads, 'category'));
-  }, [threads, authUser]);
+  }, [threads, authUser, users]);
 
   function addUserToThreads() {
     const threadLists = threads.map((thread) => ({
