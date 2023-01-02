@@ -101,7 +101,12 @@ function ThreadItem({
           <h3 className="text-slate-300 mb-2">{category}</h3>
         </div>
         <div>
-          <div>
+          <div
+            role="button"
+            tabIndex={0}
+            onClick={onThreadClick}
+            onKeyDown={onThreadPress}
+          >
             {showMore ? parse(body) : parse(removeTag(body).substring(0, 250))}
           </div>
           {removeTag(body).length > 250
