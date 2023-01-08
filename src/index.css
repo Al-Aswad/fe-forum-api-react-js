@@ -3,15 +3,80 @@
 @tailwind utilities;
 
 @layer components {
+    .app-container{
+      @apply bg-slate-100 min-h-screen;
+    }
+
+    .login-page{
+      @apply flex justify-center mt-32;
+    }
+
+    .register-page{
+      @apply flex justify-center mt-32;
+    }
+
+    .home-page {
+      @apply px-10 md:px-40 py-10 flex w-full gap-6;
+    }
+
+    .leaderboard-page {
+      @apply px-10 md:px-40 py-10 flex w-full flex-col;
+    }
+
+    .add-thread-page {
+      @apply px-10 md:px-40 py-10 flex w-full flex-col items-center;
+    }
+
+    .detail-thread-page {
+      @apply px-10 md:px-40 py-10 flex w-full flex-col items-center;
+    }
+
+    .navigation {
+      @apply flex items-center justify-between
+    }
+
     .input {
       @apply rounded-md py-2 px-4 border-2 outline-none focus:ring-2 focus:ring-blue-400;
     }
 
+    .btn {
+      @apply py-2 px-4 rounded-md;
+    }
+
+    .btn-active {
+      @apply bg-white
+    }
+
     .btn-primary {
-        @apply outline-none border-2 rounded-md py-2 px-4 bg-sky-600 text-white focus:bg-sky-700 focus:ring-2
+        @apply outline-none ring-offset-0 ring-sky-500 rounded-md py-[6px] px-4 bg-sky-600 text-white focus:bg-sky-700 focus:ring-2;
+    }
+
+    .btn-secondary {
+      @apply outline-none ring-1 ring-offset-0 ring-sky-500 rounded-md py-[6px] px-4 text-sky-500 focus:bg-white focus:ring-2 focus:ring-offset-2;
+    }
+
+    .btn-create_thread {
+      @apply btn-primary w-full shadow-md shadow-sky-600 py-2 flex justify-center items-center gap-2;
     }
 
     .text{
-        @apply text-slate-600
+        @apply text-slate-600;
     }
+
+    .active {
+      @apply text-lg font-medium text-sky-400;
+    }
+
+    .icon {
+      @apply hover:bg-sky-200 p-2 rounded-md;
+    }
+
+    .vote {
+      @apply flex p-2 rounded-md items-center hover:bg-sky-400 outline-none;
+    }
+
+    .vote-active {
+      @apply bg-green-300 text-slate-500;
+    }
+    
   }

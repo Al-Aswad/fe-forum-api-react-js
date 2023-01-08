@@ -19,4 +19,19 @@ function postedAt(date) {
   return 'just now';
 }
 
-export { postedAt };
+function groupByCount(data) {
+  const groups = data.reduce((acc, curr) => {
+    if (!acc[curr.category]) {
+      acc[curr.category] = 0;
+    }
+    acc[curr.category] += 1;
+    return acc;
+  }, {});
+
+  return Object.keys(groups).map((name) => ({
+    name,
+    count: groups[name],
+  }));
+}
+
+export { postedAt, groupByCount };
