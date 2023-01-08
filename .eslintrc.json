@@ -1,7 +1,8 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "cypress/globals": true
     },
     "extends": [
         "plugin:react/recommended",
@@ -16,7 +17,8 @@
     },
     "plugins": [
         "react",
-        "react-hooks"
+        "react-hooks",
+        "cypress"
     ],
     "rules": {
         "linebreak-style": "off",
