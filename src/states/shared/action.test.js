@@ -7,7 +7,7 @@ import { asyncPopulateUsersAndThreads } from './action';
 /**
  * skenario test
  *
- * - asyncPopulateUsersAndTalks thunk
+ * - asyncPopulateUsersAndThreads thunk
  *  - should dispatch action correctly when data fetching success
  *  - should dispatch action and call alert correctly when data fetching failed
  */
