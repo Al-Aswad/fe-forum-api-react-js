@@ -17,7 +17,7 @@ function CommentInput({ addComment, threadId }) {
 
   return (
     <form className="flex flex-col gap-4" onSubmit={onSubmitHandler}>
-      <div className="input h-20" contentEditable value={content} onInput={(e) => onCommentInput(e.target.innerHTML)} />
+      <div data-testid="commentContent" className="input h-20" contentEditable value={content} onInput={(e) => onCommentInput(e.target.innerHTML)} />
       <button type="submit" className="btn-primary w-max">Kirim</button>
     </form>
   );
