@@ -5,7 +5,7 @@
  *  - should dispatch action correctly when data fetching success
  *  - should dispatch action and call alert correctly when data fetching failed
  *
- * - asyncPopulateUsersAndThreads thunk
+ * - asyncAddThread thunk
  *  - should dispatch action correctly when data fetching success
  *  - should dispatch action and call alert correctly when data fetching failed
  */
@@ -14,8 +14,7 @@ import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import api from '../../utils/api';
 import {
   addThreadActionCreator, asyncAddThread, asyncReveiveThreads,
-  asyncUpVoteThread,
-  receiveThreadsActionCreator, upVoteThreadActionCreator,
+  receiveThreadsActionCreator,
 } from './action';
 
 const fakeThreadsResponse = [
@@ -74,25 +73,6 @@ const fakeAddThreadResponse = {
   upVotesBy: [],
   downVotesBy: [],
   totalComments: 0,
-};
-
-const fakeUpVote = {
-  id: 'thread-1',
-  title: 'Thread Pertama',
-  body: 'Ini adalah thread pertama',
-  category: 'General',
-  createdAt: '2021-06-21T07:00:00.000Z',
-  ownerId: 'users-1',
-  upVotesBy: [],
-  downVotesBy: [],
-  totalComments: 0,
-};
-
-const fakeUpVoteResponse = {
-  id: 'vote-1',
-  userId: 'users-1',
-  threadId: 'thread-1',
-  voteType: 1,
 };
 
 const fakeErrorResponse = new Error('Ups, something went wrong');
@@ -189,32 +169,4 @@ describe('asyncAddThread thunk', () => {
     expect(window.alert).toHaveBeenCalledWith(fakeErrorResponse.message);
     expect(dispatch).toHaveBeenCalledWith(hideLoading());
   });
-});
-
-describe('asyncUpVoteThread thunk', () => {
-//   beforeEach(() => {
-//     // backup original implementation
-//     api._upVoteThread = api.upVoteThread;
-//   });
-
-  //   afterEach(() => {
-  //     // restore original implementation
-  //     api.upVoteThread = api._upVoteThread;
-
-//     // delete backup
-//     delete api._upVoteThread;
-//   });
-//     // stub implementation
-//     api.createThread = () => Promise.reject(fakeErrorResponse);
-//     // mock dispatch
-//     const dispatch = jest.fn();
-//     // mock alert
-//     window.alert = jest.fn();
-//     // action
-//     await asyncUpVoteThread({ title: 'sss', category: 'ss', body: 'ss' })(dispatch);
-//     // assert
-//     expect(dispatch).toHaveBeenCalledWith(showLoading());
-//     expect(window.alert).toHaveBeenCalledWith(fakeErrorResponse.message);
-//     expect(dispatch).toHaveBeenCalledWith(hideLoading());
-//   });
 });

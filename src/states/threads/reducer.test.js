@@ -200,7 +200,6 @@ describe('threadReducer function', () => {
 
     // action: like talk
     const nextState = threadsReducer(initialState, action);
-    console.log(nextState);
     expect(nextState).toEqual([
       {
         ...initialState[0],
