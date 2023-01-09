@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Loading from './components/Loading';
 import Navigation from './components/Navigation';
 import AddThreadPage from './pages/AddThreadPage';
@@ -17,6 +17,8 @@ function App() {
     authUser = null,
     isPreload = false,
   } = useSelector((states) => states);
+
+  const { pathname } = useLocation();
 
   const dispatch = useDispatch();
 
@@ -39,7 +41,7 @@ function App() {
       <Loading />
       <div className="app-container">
         <header className="py-6 px-10 md:px-40 bg-white">
-          <Navigation authUser={authUser} logout={onSignOut} />
+          <Navigation authUser={authUser} logout={onSignOut} pathname={pathname} />
         </header>
         <main>
           <Routes>

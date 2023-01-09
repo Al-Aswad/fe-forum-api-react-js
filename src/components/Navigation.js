@@ -1,9 +1,7 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-function Navigation({ authUser, logout }) {
-  const { pathname } = useLocation();
-
+function Navigation({ authUser, logout, pathname }) {
   return (
     <section className="navigation">
       <div className="flex items-center gap-10">
@@ -49,11 +47,13 @@ const authUserShape = {
 Navigation.defaultProps = {
   logout: () => {},
   authUser: null,
+  pathname: '/',
 };
 
 Navigation.propTypes = {
   authUser: PropTypes.shape(authUserShape),
   logout: PropTypes.func,
+  pathname: PropTypes.string,
 };
 
 export default Navigation;
