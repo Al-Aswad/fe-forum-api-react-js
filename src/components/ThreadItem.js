@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import parse from 'html-react-parser';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { Tag } from '@chakra-ui/react';
 import { postedAt } from '../utils';
 import VoteUp from './VoteUp';
 import VoteDown from './VoteDown';
@@ -98,7 +99,9 @@ function ThreadItem({
           onKeyDown={onThreadPress}
         >
           <h3>{title}</h3>
-          <h3 className="text-slate-300 mb-2">{category}</h3>
+          <Tag size="md" variant="subtle" colorScheme="blue">
+            {category}
+          </Tag>
         </div>
         <div>
           <div

@@ -1,3 +1,4 @@
+import { Button } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 import useInput from '../hooks/useInput';
 
@@ -15,10 +16,15 @@ function LoginInput({ login }) {
   }
 
   return (
-    <form className="flex flex-col gap-4">
+    <form className="flex flex-col gap-4" onSubmit={onSubmitHandler}>
       <input className="input" type="text" value={email} onChange={onEmailChange} placeholder="Email" />
       <input className="input" type="password" value={password} onChange={onPasswordChange} placeholder="Password" />
-      <button type="button" className="btn-primary" onClick={onSubmitHandler}>Login</button>
+      <Button
+        type="submit"
+        colorScheme="blue"
+      >
+        Login
+      </Button>
     </form>
   );
 }
