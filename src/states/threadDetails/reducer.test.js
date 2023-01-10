@@ -19,6 +19,6 @@ describe('threadDetailsReducer function', () => {
     const nextState = threadDetailReducer(initialState, action);
 
     // assert
-    expect(nextState).toEqual({});
+    expect(nextState).toEqual(initialState);
   });
 });
