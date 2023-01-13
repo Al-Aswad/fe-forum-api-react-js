@@ -5,6 +5,9 @@
  *   - should handle email typing correctly
  *   - should handle password typing correctly
  *   - should call Register function when Register button is clicked
+ *   - should show alert when Register button is clicked and name empty
+ *   - should show alert when Register button is clicked and email empty
+ *   - should show alert when Register button is clicked and password empty
  */
 
 import { render, screen } from '@testing-library/react';
@@ -68,5 +71,71 @@ describe('LoginInput component', () => {
       email: 'budi@gmail.com',
       password: 'passwordtest',
     });
+  });
+
+  it('should show alert when Register button is clicked and name empty', async () => {
+    // Arrange
+    const mockRegister = jest.fn();
+    jest.spyOn(window, 'alert').mockImplementation(() => {});
+    render(<RegisterInput register={mockRegister} />);
+
+    // const nameInput = await screen.getByPlaceholderText('Name');
+    // await userEvent.type(nameInput, 'username');
+
+    const emailInput = await screen.getByPlaceholderText('Email');
+    await userEvent.type(emailInput, 'budi@gmail.com');
+
+    const passwordInput = await screen.getByPlaceholderText('Password');
+    await userEvent.type(passwordInput, 'passwordtest');
+
+    const registerButton = await screen.getByRole('button', { name: 'Register' });
+    // Action
+    await userEvent.click(registerButton);
+    // Assert
+    expect(window.alert).toHaveBeenCalledWith('Data tidak lengkap');
+  });
+
+  it('should show alert when Register button is clicked and email empty', async () => {
+    // Arrange
+    const mockRegister = jest.fn();
+    jest.spyOn(window, 'alert').mockImplementation(() => {});
+    render(<RegisterInput register={mockRegister} />);
+
+    const nameInput = await screen.getByPlaceholderText('Name');
+    await userEvent.type(nameInput, 'username');
+
+    // const emailInput = await screen.getByPlaceholderText('Email');
+    // await userEvent.type(emailInput, 'budi@gmail.com');
+
+    const passwordInput = await screen.getByPlaceholderText('Password');
+    await userEvent.type(passwordInput, 'passwordtest');
+
+    const registerButton = await screen.getByRole('button', { name: 'Register' });
+    // Action
+    await userEvent.click(registerButton);
+    // Assert
+    expect(window.alert).toHaveBeenCalledWith('Data tidak lengkap');
+  });
+
+  it('should show alert when Register button is clicked and password empty', async () => {
+    // Arrange
+    const mockRegister = jest.fn();
+    jest.spyOn(window, 'alert').mockImplementation(() => {});
+    render(<RegisterInput register={mockRegister} />);
+
+    const nameInput = await screen.getByPlaceholderText('Name');
+    await userEvent.type(nameInput, 'username');
+
+    const emailInput = await screen.getByPlaceholderText('Email');
+    await userEvent.type(emailInput, 'budi@gmail.com');
+
+    // const passwordInput = await screen.getByPlaceholderText('Password');
+    // await userEvent.type(passwordInput, 'passwordtest');
+
+    const registerButton = await screen.getByRole('button', { name: 'Register' });
+    // Action
+    await userEvent.click(registerButton);
+    // Assert
+    expect(window.alert).toHaveBeenCalledWith('Data tidak lengkap');
   });
 });

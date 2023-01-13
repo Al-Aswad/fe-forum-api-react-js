@@ -1,5 +1,6 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/no-array-index-key */
+import { Button, Skeleton, Stack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { FiPlusSquare } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
@@ -48,17 +49,25 @@ function HomePage() {
   }
 
   if (threads.length === 0 && users.length === 0) {
-    return null;
+    return (
+      <section className="home-page">
+        <Stack>
+          <Skeleton height="20px" />
+          <Skeleton height="20px" />
+          <Skeleton height="20px" />
+        </Stack>
+      </section>
+    );
   }
 
   return (
     <section className="home-page">
       <Threads threads={threadTemp} />
       <section className="w-2/12 flex flex-col gap-6">
-        <Link to="/threads/create" className="btn-create_thread" auth>
-          <FiPlusSquare />
-          {' '}
-          Buat Thread
+        <Link to="/threads/create" className="w-full">
+          <Button className="w-full" isFullWidth leftIcon={<FiPlusSquare />} colorScheme="blue" variant="solid">
+            Buat Thread
+          </Button>
         </Link>
 
         <div className="flex flex-col gap-2">

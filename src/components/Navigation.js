@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Button } from '@chakra-ui/react';
 
 function Navigation({ authUser, logout, pathname }) {
   return (
@@ -18,8 +19,21 @@ function Navigation({ authUser, logout, pathname }) {
         authUser === null
           ? (
             <div className="flex gap-4">
-              <Link to="/login" className="btn-secondary">Masuk</Link>
-              <Link to="/register" className="btn-primary">Daftar</Link>
+              <Link to="/login">
+                <Button
+                  colorScheme="blue"
+                  variant="outline"
+                >
+                  Masuk
+                </Button>
+              </Link>
+              <Link to="/register">
+                <Button
+                  colorScheme="blue"
+                >
+                  Daftar
+                </Button>
+              </Link>
             </div>
           )
           : (
@@ -28,7 +42,13 @@ function Navigation({ authUser, logout, pathname }) {
               <h3 className="font-semibold text-md capitalize">
                 {authUser.name}
               </h3>
-              <button type="button" className="btn-secondary ml-2" onClick={logout}>Keluar</button>
+              <Button
+                onClick={logout}
+                colorScheme="blue"
+                variant="outline"
+              >
+                Keluar
+              </Button>
 
             </div>
           )
