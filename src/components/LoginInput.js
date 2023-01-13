@@ -6,7 +6,9 @@ function LoginInput({ login }) {
   const [email, onEmailChange] = useInput('');
   const [password, onPasswordChange] = useInput('');
 
-  function onSubmitHandler() {
+  function onSubmitHandler(event) {
+    event.preventDefault();
+
     if (email === '' || password === '') {
       alert('email atau password tidak boleh kosong');
       return;
